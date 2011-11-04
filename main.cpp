@@ -4,6 +4,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <sys/mman.h>
+#include <unistd.h>
 
 
 void printMemory(unsigned int* start, unsigned int base, int size) {
@@ -34,7 +35,7 @@ int main(int argc, const char *argv[])
         perror("mmap");
         return -1;
     }
-    printMemory(map, reg_base, 100);
+    printMemory((unsigned int*)map, reg_base, 100);
 
     //int value = *(int *)(map + 0x0 );
     //printf("status = 0x%08x\n", value);
