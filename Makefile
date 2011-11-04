@@ -13,3 +13,4 @@ showreg: main.cpp XmlReader.o
 clean:
 	rm -f showreg *.o
 
+remake: clean all
