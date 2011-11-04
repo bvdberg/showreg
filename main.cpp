@@ -38,7 +38,7 @@ static unsigned size2num(const char* input) {
     return value;
 }
 
-static void printMemory(unsigned int* start, unsigned int base, int size) {
+static void printMemory(unsigned int* start, unsigned int base, unsigned int size) {
     unsigned int offset = 0;
     while (offset < size) {
         unsigned int val = *(start + offset);
@@ -47,6 +47,27 @@ static void printMemory(unsigned int* start, unsigned int base, int size) {
     }
     printf("\n");
 }
+
+
+class RegVisitor : public XmlNodeVisitor {
+public:
+    RegVisitor(unsigned int* map_base_, unsigned int reg_base_, unsigned int size_)
+        : map_base(map_base_)
+        , reg_base(reg_base_)
+        , size(size_)
+    {}
+    virtual void handle(const XmlNode* node) {
+        const std::string offsetStr = node->getAttribute("offset");
+        const std::string nameStr = node->getAttribute("name");
+        unsigned int offset = addr2num(offsetStr.c_str());
+        unsigned int value = *(map_base + offset);
+        printf("0x%08X  [0x%04X]  %10s  0x%08X\n", reg_base + offset, offset, nameStr.c_str(), value);
+    }
+private:
+    unsigned int* map_base;
+    unsigned int reg_base;
+    unsigned int size;
+};
 
 
 int main(int argc, const char *argv[])
@@ -92,35 +113,37 @@ int main(int argc, const char *argv[])
             printf("base and size cannot be 0\n");
             return -1;
         }
-        printf("Device %s  base=0x%08x  size=%d\n", nameStr.c_str(), base, size);
+        printf("[%s]  base=0x%08x  size=%d\n", nameStr.c_str(), base, size);
+
+        int fd;
+        if ((fd = open("/dev/mem", O_RDWR) ) < 0) {
+            printf("can't open /dev/mem \n");
+            exit (-1);
+        }
+
+        int prot = PROT_READ | PROT_WRITE;
+        int flags = MAP_PRIVATE;
+        //off_t reg_base = 0x01D00000;       // MCASP Control
+        void* map = mmap(NULL, size, prot, flags, fd, base);
+        if (map == (void*)-1) {
+            perror("mmap");
+            return -1;
+        }
+        printMemory((unsigned int*)map, base, 100);
+
+        // TODO use XmlNodeVisitor and show all nodes
+        RegVisitor visitor((unsigned int*)map, base, size);
+        device->visitChildren("reg", visitor);
+        //int value = *(int *)(map + 0x0 );
+        //printf("status = 0x%08x\n", value);
+
+        close(fd);
+        munmap(map, size);
 
     } catch (Error& e) {
         printf("Error: %s\n", e.what());
         return -1;
     }
-
-    int fd;
-    if ((fd = open("/dev/mem", O_RDWR) ) < 0) {
-        printf("can't open /dev/mem \n");
-        exit (-1);
-    }
-
-    int size = 4096;
-    int prot = PROT_READ | PROT_WRITE;
-    int flags = MAP_PRIVATE;
-    off_t reg_base = 0x01D00000;       // MCASP Control
-    void* map = mmap(NULL, size, prot, flags, fd, reg_base);
-    if (map == (void*)-1) {
-        perror("mmap");
-        return -1;
-    }
-    printMemory((unsigned int*)map, reg_base, 100);
-
-    //int value = *(int *)(map + 0x0 );
-    //printf("status = 0x%08x\n", value);
-
-    close(fd);
-    munmap(map, size);
 
     return 0;
 }
