@@ -1,5 +1,5 @@
 <cpu name='omapl138' >
-    <device name='mcasp' base=0x01D00000 size='4K'>
+    <device name='mcasp' base='01D00000h' size='4K'>
         <!-- source: SPRUFM1 - August 2009' -->
         <reg offset='0h' name='REV' descr='Revision ID' value='44300A02h' />
         <reg offset='44h' name='GBLCTL' descr='Global control register' />

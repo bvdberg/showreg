@@ -6,6 +6,7 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
+#include "XmlReader.h"
 
 void printMemory(unsigned int* start, unsigned int base, int size) {
     unsigned int offset = 0;
@@ -20,9 +21,26 @@ void printMemory(unsigned int* start, unsigned int base, int size) {
 
 int main(int argc, const char *argv[])
 {
+    if (argc != 2) {
+        printf("Usage: %s [file]\n", argv[0]);
+        return -1;
+    }
+
+    try {
+        XmlReader reader(argv[1]);
+        XmlNode* rootNode = reader.getRootXmlNode();
+        if (!rootNode) {
+            printf("Not a correct XML file\n");
+            return -1;
+        }
+    } catch (Error& e) {
+        printf("Error: %s\n", e.what());
+        return -1;
+    }
+
     int fd;
     if ((fd = open("/dev/mem", O_RDWR) ) < 0) {
-        printf("VGAlib: can't open /dev/mem \n");
+        printf("can't open /dev/mem \n");
         exit (-1);
     }
 
