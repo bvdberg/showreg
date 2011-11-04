@@ -3,3 +3,4 @@ showreg - a tool to show registers with values through the /dev/mem interface.
 It uses XML files to specify the offsets and names of the registers
 
 TODO: LICENSE
+TODO: select a certain device and optionally a certain reg
