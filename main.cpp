@@ -38,13 +38,15 @@ static unsigned size2num(const char* input) {
     return value;
 }
 
-static void printMemory(unsigned int* start, unsigned int base, unsigned int size) {
+
+void printMemory(unsigned int* start, unsigned int base, unsigned int size) {
     unsigned int offset = 0;
-    while (4*offset < size) {
-        unsigned int val = *(start + offset);
-        printf("0x%08X  [0x%04X]  0x%08X\n", base + offset, offset, val);
+    while (offset < size) {
+        unsigned int* ptr = start + offset;
+        unsigned int val = *(ptr);
+        printf("0x%08X  [0x%04X]  0x%08X\n", (unsigned int)ptr, offset*sizeof(int), val);
         offset += 1;
-    }
+    }   
     printf("\n");
 }
 
