@@ -2,7 +2,13 @@
     <device name='mcasp' base='01D00000h' size='4K'>
         <!-- source: SPRUFM1 - August 2009 -->
         <reg offset='0h' name='REV_ID' descr='Revision ID' expect='44300A02h' />
+        <reg offset='10h' name='PFUNC' />
+        <reg offset='14h' name='PDIR' />
         <reg offset='44h' name='GBLCTL' descr='Global control register' />
+        <reg offset='48h' name='AMUTE' />
+        <reg offset='68h' name='RFMT' />
+        <reg offset='A8h' name='XFMT' />
+        <reg offset='B8h' name='XTDM' />
     </device>
     <device name='lcd' base='01E13000h' size='4K'>
         <!-- source: SPRUFM0B - August 2010 -->
