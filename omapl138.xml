@@ -1,12 +1,12 @@
 <cpu name='omapl138' >
     <device name='mcasp' base='01D00000h' size='4K'>
         <!-- source: SPRUFM1 - August 2009 -->
-        <reg offset='0h' name='REV_ID' descr='Revision ID' value='44300A02h' />
+        <reg offset='0h' name='REV_ID' descr='Revision ID' expect='44300A02h' />
         <reg offset='44h' name='GBLCTL' descr='Global control register' />
     </device>
     <device name='lcd' base='01E13000h' size='4K'>
         <!-- source: SPRUFM0B - August 2010 -->
-        <reg offset='0h' name='REV_ID' value='4C100100h' />
+        <reg offset='0h' name='REV_ID' expect='4C100100h' />
         <reg offset='4h' name='LCD_CTRL' />
         <reg offset='8h' name='LCD_STAT' />
         <reg offset='Ch' name='LIDD_CTRL' />
@@ -28,7 +28,7 @@
         <reg offset='50h' name='LCDDMA_FB1_CEILING' />
     </device>
     <device name='emifa' base='68000000h' size='32K' >
-        <reg offset='0h' name='MIDR' value='40000205h' />
+        <reg offset='0h' name='MIDR' expect='40000205h' />
         <reg offset='4h' name='AWCC' />
         <reg offset='8h' name='SDCR' />
         <reg offset='Ch' name='SDRCR' />
