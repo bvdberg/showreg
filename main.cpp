@@ -176,7 +176,6 @@ int main(int argc, const char *argv[])
 
         int prot = PROT_READ | PROT_WRITE;
         int flags = MAP_PRIVATE;
-        //off_t reg_base = 0x01D00000;       // MCASP Control
         void* map = mmap(NULL, size, prot, flags, fd, base);
         if (map == (void*)-1) {
             perror("mmap");
@@ -184,11 +183,8 @@ int main(int argc, const char *argv[])
         }
         //printMemory((unsigned int*)map, base, 100);
 
-        // TODO use XmlNodeVisitor and show all nodes
         RegVisitor visitor((unsigned int*)map, base, size);
         device->visitChildren("reg", visitor);
-        //int value = *(int *)(map + 0x0 );
-        //printf("status = 0x%08x\n", value);
 
         close(fd);
         munmap(map, size);
