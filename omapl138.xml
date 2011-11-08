@@ -27,5 +27,16 @@
         <reg offset='4Ch' name='LCDDMA_FB1_BASE' />
         <reg offset='50h' name='LCDDMA_FB1_CEILING' />
     </device>
+    <device name='emifa' base='68000000h' size='32K' >
+        <reg offset='0h' name='MIDR' value='40000205h' />
+        <reg offset='4h' name='AWCC' />
+        <reg offset='8h' name='SDCR' />
+        <reg offset='Ch' name='SDRCR' />
+        <reg offset='10h' name='CE2CFG' />
+        <reg offset='14h' name='CE3CFG' />
+        <reg offset='18h' name='CE4CFG' />
+        <reg offset='1Ch' name='CE5CFG' />
+        <reg offset='68h' name='PMCR' />
+    </device>
 </cpu>
 
