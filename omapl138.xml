@@ -96,5 +96,122 @@
         <reg offset='14h' name='RXACTIVE' />
         <reg offset='18h' name='PWRDN' />
     </device>
+    <device name='psc0' base='01C10000h' size='4K' >
+        <reg offset='0h' name='REVID' expect='44825A00h' />
+        <reg offset='128h' name='PTSTAT' />
+        <reg offset='200h' name='PDSTAT0' />
+        <reg offset='204h' name='PDSTAT1' />
+        <reg offset='300h' name='PDCTL0' />
+        <reg offset='304h' name='PDCTL1' />
+        <reg offset='400h' name='PDCFG0' />
+        <reg offset='404h' name='PDCFG1' />
+        <reg offset='800h' name='MDSTAT0' />
+        <reg offset='804h' name='MDSTAT1' />
+        <reg offset='808h' name='MDSTAT2' />
+        <reg offset='80Ch' name='MDSTAT3' />
+        <reg offset='810h' name='MDSTAT4' />
+        <reg offset='814h' name='MDSTAT5' />
+        <reg offset='818h' name='MDSTAT6' />
+        <reg offset='81Ch' name='MDSTAT7' />
+        <reg offset='820h' name='MDSTAT8' />
+        <reg offset='824h' name='MDSTAT9' />
+        <reg offset='828h' name='MDSTAT10' />
+        <reg offset='82Ch' name='MDSTAT11' />
+        <reg offset='830h' name='MDSTAT12' />
+        <reg offset='834h' name='MDSTAT13' />
+        <reg offset='838h' name='MDSTAT14' />
+        <reg offset='83Ch' name='MDSTAT15' />
+        <reg offset='A00h' name='MDCTL0' />
+        <reg offset='A04h' name='MDCTL1' />
+        <reg offset='A08h' name='MDCTL2' />
+        <reg offset='A0Ch' name='MDCTL3' />
+        <reg offset='A10h' name='MDCTL4' />
+        <reg offset='A14h' name='MDCTL5' />
+        <reg offset='A18h' name='MDCTL6' />
+        <reg offset='A1Ch' name='MDCTL7' />
+        <reg offset='A20h' name='MDCTL8' />
+        <reg offset='A24h' name='MDCTL9' />
+        <reg offset='A28h' name='MDCTL10' />
+        <reg offset='A2Ch' name='MDCTL11' />
+        <reg offset='A30h' name='MDCTL12' />
+        <reg offset='A34h' name='MDCTL13' />
+        <reg offset='A38h' name='MDCTL14' />
+        <reg offset='A3Ch' name='MDCTL15' />
+    </device>
+    <device name='psc1' base='01E27000h' size='4K' >
+        <reg offset='0h' name='REVID' expect='44825A00h' />
+        <reg offset='128h' name='PTSTAT' />
+        <reg offset='200h' name='PDSTAT0' />
+        <reg offset='204h' name='PDSTAT1' />
+        <reg offset='300h' name='PDCTL0' />
+        <reg offset='304h' name='PDCTL1' />
+        <reg offset='400h' name='PDCFG0' />
+        <reg offset='404h' name='PDCFG1' />
+        <reg offset='800h' name='MDSTAT0' />
+        <reg offset='804h' name='MDSTAT1' />
+        <reg offset='808h' name='MDSTAT2' />
+        <reg offset='80Ch' name='MDSTAT3' />
+        <reg offset='810h' name='MDSTAT4' />
+        <reg offset='814h' name='MDSTAT5' />
+        <reg offset='818h' name='MDSTAT6' />
+        <reg offset='81Ch' name='MDSTAT7' />
+        <reg offset='820h' name='MDSTAT8' />
+        <reg offset='824h' name='MDSTAT9' />
+        <reg offset='828h' name='MDSTAT10' />
+        <reg offset='82Ch' name='MDSTAT11' />
+        <reg offset='830h' name='MDSTAT12' />
+        <reg offset='834h' name='MDSTAT13' />
+        <reg offset='838h' name='MDSTAT14' />
+        <reg offset='83Ch' name='MDSTAT15' />
+        <reg offset='840h' name='MDSTAT16' />
+        <reg offset='844h' name='MDSTAT17' />
+        <reg offset='848h' name='MDSTAT18' />
+        <reg offset='84Ch' name='MDSTAT19' />
+        <reg offset='850h' name='MDSTAT20' />
+        <reg offset='854h' name='MDSTAT21' />
+        <reg offset='858h' name='MDSTAT22' />
+        <reg offset='85Ch' name='MDSTAT23' />
+        <reg offset='860h' name='MDSTAT24' />
+        <reg offset='864h' name='MDSTAT25' />
+        <reg offset='868h' name='MDSTAT26' />
+        <reg offset='86Ch' name='MDSTAT27' />
+        <reg offset='870h' name='MDSTAT28' />
+        <reg offset='874h' name='MDSTAT29' />
+        <reg offset='878h' name='MDSTAT30' />
+        <reg offset='87Ch' name='MDSTAT31' />
+        <reg offset='A00h' name='MDCTL0' />
+        <reg offset='A04h' name='MDCTL1' />
+        <reg offset='A08h' name='MDCTL2' />
+        <reg offset='A0Ch' name='MDCTL3' />
+        <reg offset='A10h' name='MDCTL4' />
+        <reg offset='A14h' name='MDCTL5' />
+        <reg offset='A18h' name='MDCTL6' />
+        <reg offset='A1Ch' name='MDCTL7' />
+        <reg offset='A20h' name='MDCTL8' />
+        <reg offset='A24h' name='MDCTL9' />
+        <reg offset='A28h' name='MDCTL10' />
+        <reg offset='A2Ch' name='MDCTL11' />
+        <reg offset='A30h' name='MDCTL12' />
+        <reg offset='A34h' name='MDCTL13' />
+        <reg offset='A38h' name='MDCTL14' />
+        <reg offset='A3Ch' name='MDCTL15' />
+        <reg offset='A40h' name='MDCTL16' />
+        <reg offset='A44h' name='MDCTL17' />
+        <reg offset='A48h' name='MDCTL18' />
+        <reg offset='A4Ch' name='MDCTL19' />
+        <reg offset='A50h' name='MDCTL20' />
+        <reg offset='A54h' name='MDCTL21' />
+        <reg offset='A58h' name='MDCTL22' />
+        <reg offset='A5Ch' name='MDCTL23' />
+        <reg offset='A60h' name='MDCTL24' />
+        <reg offset='A64h' name='MDCTL25' />
+        <reg offset='A68h' name='MDCTL26' />
+        <reg offset='A6Ch' name='MDCTL27' />
+        <reg offset='A70h' name='MDCTL28' />
+        <reg offset='A74h' name='MDCTL29' />
+        <reg offset='A78h' name='MDCTL30' />
+        <reg offset='A7Ch' name='MDCTL31' />
+        <reg offset='h' name='' />
+    </device>
 </cpu>
 
