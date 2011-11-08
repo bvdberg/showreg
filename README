@@ -3,7 +3,6 @@ showreg - a tool to show registers with values through the /dev/mem interface.
 It uses XML files to specify the offsets and names of the registers
 
 TODO: LICENSE
-TODO: check input reg addresses are word offsets
 
 example output:
 

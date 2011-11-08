@@ -66,7 +66,11 @@ public:
         unsigned int offset = addr2num(offsetStr.c_str());
         
         if (offset >= size) {
-            printf("line: %d  register offset outside mapping\n", node->getLine());
+            printf("line %d: register offset outside mapping\n", node->getLine());
+            exit(-1);
+        }
+        if ((offset & 0x3) != 0) {
+            printf("line %d: register offset not on word offset\n", node->getLine());
             exit(-1);
         }
         unsigned int addr = (unsigned int)map_base;
