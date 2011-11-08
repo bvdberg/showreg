@@ -62,8 +62,10 @@ public:
         const std::string offsetStr = node->getAttribute("offset");
         const std::string nameStr = node->getAttribute("name");
         unsigned int offset = addr2num(offsetStr.c_str());
-        // TODO FIX: offset is in words, since it's added to int*!!!!!
-        unsigned int value = *(map_base + offset);
+
+        unsigned int addr = (unsigned int)map_base;
+        addr += offset;
+        unsigned int value = *((unsigned int*)addr);
         printf("0x%08X  [0x%04X]  %20s  0x%08X\n", reg_base + offset, offset, nameStr.c_str(), value);
     }
 private:
