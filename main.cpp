@@ -9,6 +9,24 @@
 
 #include "XmlReader.h"
 
+#define ANSI_BLACK "\033[0;30m"
+#define ANSI_RED "\033[0;31m"
+#define ANSI_GREEN "\033[0;32m"
+#define ANSI_YELLOW "\033[0;33m"
+#define ANSI_BLUE "\033[0;34m"
+#define ANSI_MAGENTA "\033[0;35m"
+#define ANSI_CYAN "\033[0;36m"
+#define ANSI_GREY "\033[0;37m"
+#define ANSI_DARKGREY "\033[01;30m"
+#define ANSI_BRED "\033[01;31m"
+#define ANSI_BGREEN "\033[01;32m"
+#define ANSI_BYELLOW "\033[01;33m"
+#define ANSI_BBLUE "\033[01;34m"
+#define ANSI_BMAGENTA "\033[01;35m"
+#define ANSI_BCYAN "\033[01;36m"
+#define ANSI_WHITE "\033[01;37m"
+#define ANSI_NORMAL "\033[0m"
+
 // support '1234', '1234h'
 static unsigned addr2num(const char* input) {
     int size = strlen(input);
@@ -25,6 +43,7 @@ static unsigned addr2num(const char* input) {
     return value;
 }
 
+// support '4K', '32k'
 static unsigned size2num(const char* input) {
     int size = strlen(input);
     if (size == 0) return 0;
@@ -62,11 +81,22 @@ public:
         const std::string offsetStr = node->getAttribute("offset");
         const std::string nameStr = node->getAttribute("name");
         unsigned int offset = addr2num(offsetStr.c_str());
-
+        
         unsigned int addr = (unsigned int)map_base;
         addr += offset;
         unsigned int value = *((unsigned int*)addr);
-        printf("0x%08X  [0x%04X]  %20s  0x%08X\n", reg_base + offset, offset, nameStr.c_str(), value);
+
+        if (node->hasAttribute("expect")) {
+            const std::string expectStr = node->getAttribute("expect"); 
+            unsigned int expect = addr2num(expectStr.c_str());
+            if (expect != value) {
+                printf("0x%08X  [0x%04X]  %20s  0x%08X (NOT OK, expected 0x%08x)\n", reg_base + offset, offset, nameStr.c_str(), value, expect);
+            } else {
+                printf("0x%08X  [0x%04X]  %20s  0x%08X (OK)\n", reg_base + offset, offset, nameStr.c_str(), value);
+            }
+        } else {
+            printf("0x%08X  [0x%04X]  %20s  0x%08X\n", reg_base + offset, offset, nameStr.c_str(), value);
+        }
     }
 private:
     unsigned int* map_base;
