@@ -1,5 +1,6 @@
 
 CC=arm-none-linux-gnueabi-g++
+STRIP=arm-none-linux-gnueabi-strip
 #CC=g++
 ARGS=-O2 -Wall
 
@@ -10,6 +11,7 @@ XmlReader.o: XmlReader.cpp
 
 showreg: main.cpp XmlReader.o
 	$(CC) $(ARGS) main.cpp XmlReader.o -o showreg
+	$(STRIP) showreg
 
 clean:
 	rm -f showreg *.o
