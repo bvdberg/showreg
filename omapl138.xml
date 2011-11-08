@@ -211,7 +211,6 @@
         <reg offset='A74h' name='MDCTL29' />
         <reg offset='A78h' name='MDCTL30' />
         <reg offset='A7Ch' name='MDCTL31' />
-        <reg offset='h' name='' />
     </device>
     <device name='pll0' base='01C11000h' size='4K' >
         <reg offset='0h' name='REVID' expect='44813C00h' />

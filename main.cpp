@@ -65,6 +65,10 @@ public:
         const std::string nameStr = node->getAttribute("name");
         unsigned int offset = addr2num(offsetStr.c_str());
         
+        if (offset >= size) {
+            printf("line: %d  register offset outside mapping\n", node->getLine());
+            exit(-1);
+        }
         unsigned int addr = (unsigned int)map_base;
         addr += offset;
         unsigned int value = *((volatile unsigned int*)addr);
