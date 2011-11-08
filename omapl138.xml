@@ -213,5 +213,44 @@
         <reg offset='A7Ch' name='MDCTL31' />
         <reg offset='h' name='' />
     </device>
+    <device name='pll0' base='01C11000h' size='4K' >
+        <reg offset='0h' name='REVID' expect='44813C00h' />
+        <reg offset='100h' name='PLLCTL' />
+        <reg offset='104h' name='OCSEL' />
+        <reg offset='110h' name='PLLM' />
+        <reg offset='114h' name='PREDIV' />
+        <reg offset='118h' name='PLLDIV1' />
+        <reg offset='11Ch' name='PLLDIV2' />
+        <reg offset='120h' name='PLLDIV3' />
+        <reg offset='124h' name='OSCDIV' />
+        <reg offset='128h' name='POSTDIV' />
+        <reg offset='138h' name='PLLCMD' />
+        <reg offset='13Ch' name='PLLSTAT' />
+        <reg offset='140h' name='ALNCTL' />
+        <reg offset='144h' name='DCHANGE' />
+        <reg offset='148h' name='CKEN' />
+        <reg offset='14Ch' name='CKSTAT' />
+        <reg offset='150h' name='SYSTAT' />
+        <reg offset='160h' name='PLLDIV4' />
+        <reg offset='164h' name='PLLDIV5' />
+        <reg offset='168h' name='PLLDIV6' />
+        <reg offset='16Ch' name='PLLDIV7' />
+    </device>
+    <device name='pll1' base='01E1A000h' size='4K' >
+        <reg offset='0h' name='REVID' expect='44814400h' />
+        <reg offset='100h' name='PLLCTL' />
+        <reg offset='104h' name='OCSEL' />
+        <reg offset='110h' name='PLLM' />
+        <reg offset='118h' name='PLLDIV1' />
+        <reg offset='11Ch' name='PLLDIV2' />
+        <reg offset='120h' name='PLLDIV3' />
+        <reg offset='124h' name='OSCDIV' />
+        <reg offset='128h' name='POSTDIV' />
+        <reg offset='138h' name='PLLCMD' />
+        <reg offset='13Ch' name='PLLSTAT' />
+        <reg offset='140h' name='ALNCTL' />
+        <reg offset='144h' name='DCHANGE' />
+        <reg offset='150h' name='SYSTAT' />
+    </device>
 </cpu>
 

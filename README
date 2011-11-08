@@ -5,6 +5,7 @@ It uses XML files to specify the offsets and names of the registers
 TODO: LICENSE
 TODO: check that the registers fall into the mapped area
 TODO: check input reg addresses are word offsets
+TODO: show all devices with argument 'all'
 
 example output:
 
