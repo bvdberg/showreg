@@ -107,14 +107,18 @@ private:
 
 class DeviceVisitor : public XmlNodeVisitor {
 public:
-    DeviceVisitor(const std::string& name_) : name(name_), device(0) {}
+    DeviceVisitor(const char* name_) : name(name_), device(0) {}
     virtual void handle(const XmlNode* node) {
         const std::string nameStr = node->getAttribute("name");
-        if (nameStr == name) device = node;
+        if (name == 0) {
+            printf("  %s\n", nameStr.c_str());
+        } else {
+            if (nameStr == name) device = node;
+        }
     }
     const XmlNode* getDevice() const { return device; }
 private:
-    std::string name;
+    const char* name;
     const XmlNode* device;
 };
 
@@ -122,17 +126,11 @@ private:
 
 int main(int argc, const char *argv[])
 {
-    if (argc != 3) {
-        printf("Usage: %s [file] [device]\n", argv[0]);
+    if (argc != 2 && argc != 3) {
+        printf("Usage: %s [file] <device>\n", argv[0]);
         return -1;
     }
-/*
-<cpu name='omapl138' >
-    <device name='mcasp' base='01D00000h' size='4K'>
-        <!-- source: SPRUFM1 - August 2009' -->
-        <reg offset='0h' name='REV' descr='Revision ID' value='44300A02h' />
-        <reg offset='44h' name='GBLCTL' descr='Global control register' />
-*/
+
     try {
         XmlReader reader(argv[1]);
         XmlNode* rootNode = reader.getRootXmlNode();
@@ -146,8 +144,12 @@ int main(int argc, const char *argv[])
             return -1;
         }
 
-        DeviceVisitor deviceVisitor(argv[2]);
+        const char* arg = 0;
+        if (argc == 2) arg = 0;
+        if (argc == 3) arg = argv[2];
+        DeviceVisitor deviceVisitor(arg);
         rootNode->visitChildren("device", deviceVisitor);
+        if (argc == 2) return 0;
         const XmlNode* device = deviceVisitor.getDevice();
         if (device == 0) {
             printf("No such device '%s'\n", argv[2]);
