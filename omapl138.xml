@@ -38,5 +38,17 @@
         <reg offset='1Ch' name='CE5CFG' />
         <reg offset='68h' name='PMCR' />
     </device>
+    <device name='ddr' base='B0000000h' size='32K' >
+        <!-- source: SPRUGJ4 - June 2009 -->
+        <reg offset='0h' name='REVID' expect='40311B1Fh' />
+        <reg offset='4h' name='SDRSTAT' />
+        <reg offset='8h' name='SDCR' />
+        <reg offset='Ch' name='SDRCR' />
+        <reg offset='10h' name='SDTIMR1' />
+        <reg offset='14h' name='SDTIMR2' />
+        <reg offset='1Ch' name='SDCR2' />
+        <reg offset='20h' name='PBBPR' />
+        <reg offset='E4h' name='DRPYC1R' />
+    </device>
 </cpu>
 
