@@ -64,7 +64,7 @@ public:
         unsigned int offset = addr2num(offsetStr.c_str());
         // TODO FIX: offset is in words, since it's added to int*!!!!!
         unsigned int value = *(map_base + offset);
-        printf("0x%08X  [0x%04X]  %10s  0x%08X\n", reg_base + offset, offset, nameStr.c_str(), value);
+        printf("0x%08X  [0x%04X]  %20s  0x%08X\n", reg_base + offset, offset, nameStr.c_str(), value);
     }
 private:
     unsigned int* map_base;
@@ -73,10 +73,25 @@ private:
 };
 
 
+class DeviceVisitor : public XmlNodeVisitor {
+public:
+    DeviceVisitor(const std::string& name_) : name(name_), device(0) {}
+    virtual void handle(const XmlNode* node) {
+        const std::string nameStr = node->getAttribute("name");
+        if (nameStr == name) device = node;
+    }
+    const XmlNode* getDevice() const { return device; }
+private:
+    std::string name;
+    const XmlNode* device;
+};
+
+
+
 int main(int argc, const char *argv[])
 {
-    if (argc != 2) {
-        printf("Usage: %s [file]\n", argv[0]);
+    if (argc != 3) {
+        printf("Usage: %s [file] [device]\n", argv[0]);
         return -1;
     }
 /*
@@ -98,15 +113,16 @@ int main(int argc, const char *argv[])
             printf("No CPU found\n");
             return -1;
         }
-        // NOTE: for now always take first device
-        const XmlNode* device = rootNode->getChild("device");
+
+        DeviceVisitor deviceVisitor(argv[2]);
+        rootNode->visitChildren("device", deviceVisitor);
+        const XmlNode* device = deviceVisitor.getDevice();
         if (device == 0) {
-            printf("No device found\n");
+            printf("No such device '%s'\n", argv[2]);
             return -1;
         }
 
         // read base address and size
-
         const std::string nameStr = device->getAttribute("name");
         const std::string baseStr = device->getAttribute("base");
         const std::string sizeStr = device->getAttribute("size");
@@ -116,7 +132,7 @@ int main(int argc, const char *argv[])
             printf("base and size cannot be 0\n");
             return -1;
         }
-        printf("[%s]  base=0x%08x  size=%d\n", nameStr.c_str(), base, size);
+        printf("==== [%s  base=0x%08x  size=%d] =====\n", nameStr.c_str(), base, size);
 
         int fd;
         if ((fd = open("/dev/mem", O_RDWR) ) < 0) {
@@ -132,7 +148,7 @@ int main(int argc, const char *argv[])
             perror("mmap");
             return -1;
         }
-        printMemory((unsigned int*)map, base, 100);
+        //printMemory((unsigned int*)map, base, 100);
 
         // TODO use XmlNodeVisitor and show all nodes
         RegVisitor visitor((unsigned int*)map, base, size);
