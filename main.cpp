@@ -1,31 +1,14 @@
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <fcntl.h>
+#include <stdio.h>
 #include <stdlib.h>
-#include <sys/mman.h>
-#include <unistd.h>
 #include <string.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 #include "XmlReader.h"
 
-#define ANSI_BLACK "\033[0;30m"
-#define ANSI_RED "\033[0;31m"
-#define ANSI_GREEN "\033[0;32m"
-#define ANSI_YELLOW "\033[0;33m"
-#define ANSI_BLUE "\033[0;34m"
-#define ANSI_MAGENTA "\033[0;35m"
-#define ANSI_CYAN "\033[0;36m"
-#define ANSI_GREY "\033[0;37m"
-#define ANSI_DARKGREY "\033[01;30m"
-#define ANSI_BRED "\033[01;31m"
-#define ANSI_BGREEN "\033[01;32m"
-#define ANSI_BYELLOW "\033[01;33m"
-#define ANSI_BBLUE "\033[01;34m"
-#define ANSI_BMAGENTA "\033[01;35m"
-#define ANSI_BCYAN "\033[01;36m"
-#define ANSI_WHITE "\033[01;37m"
-#define ANSI_NORMAL "\033[0m"
 
 // support '1234', '1234h'
 static unsigned addr2num(const char* input) {
@@ -84,7 +67,7 @@ public:
         
         unsigned int addr = (unsigned int)map_base;
         addr += offset;
-        unsigned int value = *((unsigned int*)addr);
+        unsigned int value = *((volatile unsigned int*)addr);
 
         if (node->hasAttribute("expect")) {
             const std::string expectStr = node->getAttribute("expect"); 
@@ -107,19 +90,54 @@ private:
 
 class DeviceVisitor : public XmlNodeVisitor {
 public:
-    DeviceVisitor(const char* name_) : name(name_), device(0) {}
+    DeviceVisitor(const char* name_) : name(name_), numDevices(0) {}
     virtual void handle(const XmlNode* node) {
         const std::string nameStr = node->getAttribute("name");
+        const std::string baseStr = node->getAttribute("base");
+        const std::string sizeStr = node->getAttribute("size");
+        unsigned int base = addr2num(baseStr.c_str());
+        unsigned int size = size2num(sizeStr.c_str());
+
         if (name == 0) {
             printf("  %s\n", nameStr.c_str());
-        } else {
-            if (nameStr == name) device = node;
+            return;
         }
+        if (nameStr != name && strcmp("all", name) != 0) return;
+        numDevices++;
+
+        // read base address and size
+        if (base == 0 || size == 0) {
+            printf("line %d: base and size cannot be 0\n", node->getLine());
+            exit(-1);
+        }
+        printf("==== [%s  base=0x%08x  size=%d] =====\n", nameStr.c_str(), base, size);
+
+        int fd = open("/dev/mem", O_RDWR);
+        if (fd < 0) {
+            perror("open");
+            exit(-1);
+        }
+
+        int prot = PROT_READ | PROT_WRITE;
+        int flags = MAP_PRIVATE;
+        void* map = mmap(NULL, size, prot, flags, fd, base);
+        if (map == (void*)-1) {
+            perror("mmap");
+            exit(-1);
+        }
+
+        //printMemory((unsigned int*)map, base, 100);
+
+        RegVisitor visitor((unsigned int*)map, base, size);
+        node->visitChildren("reg", visitor);
+
+        close(fd);
+        munmap(map, size);
     }
-    const XmlNode* getDevice() const { return device; }
+    int getNumDevices() const { return numDevices; }
 private:
     const char* name;
-    const XmlNode* device;
+    int numDevices;
 };
 
 
@@ -147,48 +165,11 @@ int main(int argc, const char *argv[])
         const char* arg = 0;
         if (argc == 2) arg = 0;
         if (argc == 3) arg = argv[2];
-        DeviceVisitor deviceVisitor(arg);
-        rootNode->visitChildren("device", deviceVisitor);
-        if (argc == 2) return 0;
-        const XmlNode* device = deviceVisitor.getDevice();
-        if (device == 0) {
-            printf("No such device '%s'\n", argv[2]);
-            return -1;
+        DeviceVisitor visitor(arg);
+        rootNode->visitChildren("device", visitor);
+        if (argc == 3 && visitor.getNumDevices() == 0) {
+            printf("unknown device\n");
         }
-
-        // read base address and size
-        const std::string nameStr = device->getAttribute("name");
-        const std::string baseStr = device->getAttribute("base");
-        const std::string sizeStr = device->getAttribute("size");
-        unsigned int base = addr2num(baseStr.c_str());
-        unsigned int size = size2num(sizeStr.c_str());
-        if (base == 0 || size == 0) {
-            printf("base and size cannot be 0\n");
-            return -1;
-        }
-        printf("==== [%s  base=0x%08x  size=%d] =====\n", nameStr.c_str(), base, size);
-
-        int fd;
-        if ((fd = open("/dev/mem", O_RDWR) ) < 0) {
-            printf("can't open /dev/mem \n");
-            exit (-1);
-        }
-
-        int prot = PROT_READ | PROT_WRITE;
-        int flags = MAP_PRIVATE;
-        void* map = mmap(NULL, size, prot, flags, fd, base);
-        if (map == (void*)-1) {
-            perror("mmap");
-            return -1;
-        }
-        //printMemory((unsigned int*)map, base, 100);
-
-        RegVisitor visitor((unsigned int*)map, base, size);
-        device->visitChildren("reg", visitor);
-
-        close(fd);
-        munmap(map, size);
-
     } catch (Error& e) {
         printf("Error: %s\n", e.what());
         return -1;
