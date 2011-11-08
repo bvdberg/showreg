@@ -56,5 +56,45 @@
         <reg offset='20h' name='PBBPR' />
         <reg offset='E4h' name='DRPYC1R' />
     </device>
+    <device name='syscfg0' base='01C14000h' size='4K' >
+        <reg offset='0h' name='REVID' expect='4E840102h' />
+        <reg offset='18h' name='DEVIDR0' expect='1B7D102Fh' />
+        <reg offset='40h' name='HOST0CFG' />
+        <reg offset='44h' name='HOST0CFG' />
+        <reg offset='120h' name='PINMUX0' />
+        <reg offset='124h' name='PINMUX1' />
+        <reg offset='128h' name='PINMUX2' />
+        <reg offset='12Ch' name='PINMUX3' />
+        <reg offset='130h' name='PINMUX4' />
+        <reg offset='134h' name='PINMUX5' />
+        <reg offset='138h' name='PINMUX6' />
+        <reg offset='13Ch' name='PINMUX7' />
+        <reg offset='140h' name='PINMUX8' />
+        <reg offset='144h' name='PINMUX9' />
+        <reg offset='148h' name='PINMUX10' />
+        <reg offset='14Ch' name='PINMUX11' />
+        <reg offset='150h' name='PINMUX12' />
+        <reg offset='154h' name='PINMUX13' />
+        <reg offset='158h' name='PINMUX14' />
+        <reg offset='15Ch' name='PINMUX15' />
+        <reg offset='160h' name='PINMUX16' />
+        <reg offset='164h' name='PINMUX17' />
+        <reg offset='168h' name='PINMUX18' />
+        <reg offset='16Ch' name='PINMUX19' />
+        <reg offset='17Ch' name='CFGCHIP0' />
+        <reg offset='180h' name='CFGCHIP1' />
+        <reg offset='184h' name='CFGCHIP2' />
+        <reg offset='188h' name='CFGCHIP3' />
+        <reg offset='18Ch' name='CFGCHIP4' />
+    </device>
+    <device name='syscfg1' base='01E2C000h' size='4K' >
+        <reg offset='0h' name='VTPIO_CTL' />
+        <reg offset='4h' name='DDR_SLEW' />
+        <reg offset='8h' name='DEEPSLEEP' />
+        <reg offset='Ch' name='PUPD_ENA' />
+        <reg offset='10h' name='PUPD_SEL' />
+        <reg offset='14h' name='RXACTIVE' />
+        <reg offset='18h' name='PWRDN' />
+    </device>
 </cpu>
 
