@@ -7,8 +7,17 @@
         <reg offset='44h' name='GBLCTL' descr='Global control register' />
         <reg offset='48h' name='AMUTE' />
         <reg offset='68h' name='RFMT' />
+        <reg offset='6Ch' name='AFSRCTL' />
+        <reg offset='70h' name='ACLKRCTL' />
+        <reg offset='74h' name='AHCLKRCTL' />
+        <reg offset='7Ch' name='RINTCTL' />
         <reg offset='A8h' name='XFMT' />
+        <reg offset='ACh' name='AFSXCTL' />
+        <reg offset='B0h' name='ACLKXCTL' />
+        <reg offset='B4h' name='AHCLKXCTL' />
         <reg offset='B8h' name='XTDM' />
+        <reg offset='BCh' name='XINTCTL' />
+
     </device>
     <device name='lcd' base='01E13000h' size='4K'>
         <!-- source: SPRUFM0B - August 2010 -->
