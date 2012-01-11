@@ -282,5 +282,47 @@
         <reg offset='168h' name='PINMUX18' />
         <reg offset='16ch' name='PINMUX19' />
     </device>
+    <device name='i2c0' base='01c22000h' size='4K' >
+        <reg offset='0h' name='ICOAR' />
+        <reg offset='4h' name='ICIMR' />
+        <reg offset='8h' name='ICSTR' />
+        <reg offset='Ch' name='ICCLKL' />
+        <reg offset='10h' name='ICCLKH' />
+        <reg offset='14h' name='ICCNT' />
+        <reg offset='18h' name='ICDRR' />
+        <reg offset='1Ch' name='ICSAR' />
+        <reg offset='20h' name='ICDXR' />
+        <reg offset='24h' name='ICMDR' />
+        <reg offset='28h' name='ICIVR' />
+        <reg offset='2Ch' name='ICEMDR' />
+        <reg offset='30h' name='ICPSC' />
+        <reg offset='34h' name='REVID1' expect='00004415h' />
+        <reg offset='38h' name='REVID2' expect='00000006h' />
+        <reg offset='48h' name='ICPFUNC' />
+        <reg offset='4Ch' name='ICPDIR' />
+        <reg offset='50h' name='ICPDIN' />
+        <reg offset='54h' name='ICPDOUT' />
+    </device>
+    <device name='i2c1' base='01e28000h' size='4K' >
+        <reg offset='0h' name='ICOAR' />
+        <reg offset='4h' name='ICIMR' />
+        <reg offset='8h' name='ICSTR' />
+        <reg offset='Ch' name='ICCLKL' />
+        <reg offset='10h' name='ICCLKH' />
+        <reg offset='14h' name='ICCNT' />
+        <reg offset='18h' name='ICDRR' />
+        <reg offset='1Ch' name='ICSAR' />
+        <reg offset='20h' name='ICDXR' />
+        <reg offset='24h' name='ICMDR' />
+        <reg offset='28h' name='ICIVR' />
+        <reg offset='2Ch' name='ICEMDR' />
+        <reg offset='30h' name='ICPSC' />
+        <reg offset='34h' name='REVID1' expect='00004415h' />
+        <reg offset='38h' name='REVID2' expect='00000006h' />
+        <reg offset='48h' name='ICPFUNC' />
+        <reg offset='4Ch' name='ICPDIR' />
+        <reg offset='50h' name='ICPDIN' />
+        <reg offset='54h' name='ICPDOUT' />
+    </device>
 </cpu>
 
