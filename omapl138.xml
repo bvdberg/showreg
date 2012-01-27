@@ -6,11 +6,14 @@
         <reg offset='14h' name='PDIR' />
         <reg offset='44h' name='GBLCTL' descr='Global control register' />
         <reg offset='48h' name='AMUTE' />
+        <reg offset='64h' name='RMASK' />
         <reg offset='68h' name='RFMT' />
         <reg offset='6Ch' name='AFSRCTL' />
         <reg offset='70h' name='ACLKRCTL' />
         <reg offset='74h' name='AHCLKRCTL' />
+        <reg offset='78h' name='RTDM' />
         <reg offset='7Ch' name='RINTCTL' />
+        <reg offset='A4h' name='XMASK' />
         <reg offset='A8h' name='XFMT' />
         <reg offset='ACh' name='AFSXCTL' />
         <reg offset='B0h' name='ACLKXCTL' />
