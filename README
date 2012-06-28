@@ -3,6 +3,8 @@ showreg - a tool to show registers with values through the /dev/mem interface.
 It uses XML files to specify the offsets and names of the registers
 
 TODO: LICENSE
+TODO: add register width (8/16/32 bits)
+    -> per register or per device is possible
 
 example output:
 
