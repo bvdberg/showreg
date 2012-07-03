@@ -55,10 +55,11 @@ void printMemory(unsigned int* start, unsigned int base, unsigned int size) {
 
 class RegVisitor : public XmlNodeVisitor {
 public:
-    RegVisitor(unsigned int* map_base_, unsigned int reg_base_, unsigned int size_)
+    RegVisitor(unsigned int* map_base_, unsigned int reg_base_, unsigned int size_, unsigned int regsize_ = 32)
         : map_base(map_base_)
         , reg_base(reg_base_)
         , size(size_)
+        , regsize(regsize_)
     {}
     virtual void handle(const XmlNode* node) {
         const std::string offsetStr = node->getAttribute("offset");
@@ -76,23 +77,50 @@ public:
         unsigned int addr = (unsigned int)map_base;
         addr += offset;
         unsigned int value = *((volatile unsigned int*)addr);
+        switch (regsize) {
+        case 16:
+            value &= 0xffff;
+            break;
+        default:
+            // no nothing
+            break;
+        }
 
         if (node->hasAttribute("expect")) {
             const std::string expectStr = node->getAttribute("expect"); 
             unsigned int expect = addr2num(expectStr.c_str());
-            if (expect != value) {
-                printf("0x%08X  [0x%04X]  %20s  0x%08X (NOT OK, expected 0x%08x)\n", reg_base + offset, offset, nameStr.c_str(), value, expect);
-            } else {
-                printf("0x%08X  [0x%04X]  %20s  0x%08X (OK)\n", reg_base + offset, offset, nameStr.c_str(), value);
+            switch (regsize) {
+            case 16:
+                if (expect != value) {
+                    printf("0x%08X  [0x%04X]  %20s  0x%04X (NOT OK, expected 0x%08x)\n", reg_base + offset, offset, nameStr.c_str(), value, expect);
+                } else {
+                    printf("0x%08X  [0x%04X]  %20s  0x%04X (OK)\n", reg_base + offset, offset, nameStr.c_str(), value);
+                }
+                break;
+            default:
+                if (expect != value) {
+                    printf("0x%08X  [0x%04X]  %20s  0x%08X (NOT OK, expected 0x%08x)\n", reg_base + offset, offset, nameStr.c_str(), value, expect);
+                } else {
+                    printf("0x%08X  [0x%04X]  %20s  0x%08X (OK)\n", reg_base + offset, offset, nameStr.c_str(), value);
+                }
+                break;
             }
         } else {
-            printf("0x%08X  [0x%04X]  %20s  0x%08X\n", reg_base + offset, offset, nameStr.c_str(), value);
+            switch (regsize) {
+            case 16:
+                printf("0x%08X  [0x%04X]  %20s  0x%04X\n", reg_base + offset, offset, nameStr.c_str(), value);
+                break;
+            default:
+                printf("0x%08X  [0x%04X]  %20s  0x%08X\n", reg_base + offset, offset, nameStr.c_str(), value);
+                break;
+            }
         }
     }
 private:
     unsigned int* map_base;
     unsigned int reg_base;
     unsigned int size;
+    unsigned int regsize;
 };
 
 
@@ -103,8 +131,12 @@ public:
         const std::string nameStr = node->getAttribute("name");
         const std::string baseStr = node->getAttribute("base");
         const std::string sizeStr = node->getAttribute("size");
+        const std::string& regSizeStr = node->getOptionalAttribute("regsize");
+        
         unsigned int base = addr2num(baseStr.c_str());
         unsigned int size = size2num(sizeStr.c_str());
+        unsigned int regsize = 32;
+        if (regSizeStr != "") regsize = atoi(regSizeStr.c_str());
 
         if (name == 0) {
             printf("  %s\n", nameStr.c_str());
@@ -118,7 +150,7 @@ public:
             printf("line %d: base and size cannot be 0\n", node->getLine());
             exit(-1);
         }
-        printf("==== [%s  base=0x%08x  size=%d] =====\n", nameStr.c_str(), base, size);
+        printf("==== [%s  base=0x%08x  size=%d  regisize=%d] =====\n", nameStr.c_str(), base, size, regsize);
 
         int fd = open("/dev/mem", O_RDWR);
         if (fd < 0) {
@@ -136,7 +168,7 @@ public:
 
         //printMemory((unsigned int*)map, base, 100);
 
-        RegVisitor visitor((unsigned int*)map, base, size);
+        RegVisitor visitor((unsigned int*)map, base, size, regsize);
         node->visitChildren("reg", visitor);
 
         close(fd);
