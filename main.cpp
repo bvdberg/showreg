@@ -150,7 +150,7 @@ public:
             printf("line %d: base and size cannot be 0\n", node->getLine());
             exit(-1);
         }
-        printf("==== [%s  base=0x%08x  size=%d  regisize=%d] =====\n", nameStr.c_str(), base, size, regsize);
+        printf("==== [%s  base=0x%08x  size=%d  regsize=%d] =====\n", nameStr.c_str(), base, size, regsize);
 
         int fd = open("/dev/mem", O_RDWR);
         if (fd < 0) {
