@@ -9,6 +9,13 @@
 
 #include "XmlReader.h"
 
+#define __raw_readb(a)      (*(volatile unsigned char  *)(a))
+#define __raw_readw(a)      (*(volatile unsigned short  *)(a))
+#define __raw_readl(a)      (*(volatile unsigned int  *)(a))
+
+#define ioread8(p)  ({ unsigned int __v = __raw_readb(p); __v; })
+#define ioread16(p) ({ unsigned int __v = __raw_readw(p); __v; })
+#define ioread32(p) ({ unsigned int __v = __raw_readl(p); __v; })
 
 // support '1234', '1234h'
 static unsigned addr2num(const char* input) {
@@ -78,7 +85,11 @@ public:
         addr += offset;
         unsigned int value = *((volatile unsigned int*)addr);
         switch (regsize) {
+        case 32:
+            value = ioread32(addr);
+            break;
         case 16:
+            value = ioread16(addr);
             value &= 0xffff;
             break;
         default:
