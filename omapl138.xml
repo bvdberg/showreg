@@ -1,6 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <cpu name='omapl138' >
+    <device name='gpio' base='01E26000h' size='4K'>
+        <reg offset='0h' name='REV_ID' descr='Revision ID' expect='44831105h' />
+        <reg offset='10h' name='DIR01' />
+        <reg offset='20h' name='IN_DATA01' />
+        <reg offset='38h' name='DIR23' />
+        <reg offset='48h' name='IN_DATA23' />
+        <reg offset='60h' name='DIR45' />
+        <reg offset='70h' name='IN_DATA45' />
+        <reg offset='88h' name='DIR67' />
+        <reg offset='98h' name='IN_DATA67' />
+        <reg offset='B0h' name='DIR8' />
+        <reg offset='C0h' name='IN_DATA8' />
+    </device>
     <device name='mcasp' base='01D00000h' size='4K'>
         <!-- source: SPRUFM1 - August 2009 -->
         <reg offset='0h' name='REV_ID' descr='Revision ID' expect='44300A02h' />
