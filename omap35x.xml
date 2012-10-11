@@ -1,73 +1,61 @@
 <cpu name='omap35x' >
-    <device name='GPIO1' base='48310000h' size='4K'>
+<!-- source: SPRUF98X Memory Map, page 198-207 -->
+    <device name='gpio1' base='48310000h' size='4K'>
         <reg offset='0h' name='REV_ID' expect='1234h' />
-        <reg offset='34h' name='OE' />
         <reg offset='34h' name='OE' />
         <reg offset='38h' name='DATAIN' />
         <reg offset='3Ch' name='DATAOUT' />
         <reg offset='54h' name='DEBOUNCINGTIME' />
-<!--        <reg offset='90h' name='CLEARDATAOUT' /> -->
-<!--        <reg offset='94h' name='SETDATAOUT' /> -->
     </device>
-    <device name='GPIO2' base='49050000h' size='4K'>
+    <device name='gpio2' base='49050000h' size='4K'>
         <reg offset='0h' name='REV_ID' expect='1234h' />
-        <reg offset='34h' name='OE' />
         <reg offset='34h' name='OE' />
         <reg offset='38h' name='DATAIN' />
         <reg offset='3Ch' name='DATAOUT' />
         <reg offset='54h' name='DEBOUNCINGTIME' />
-<!--        <reg offset='90h' name='CLEARDATAOUT' /> -->
-<!--        <reg offset='94h' name='SETDATAOUT' /> -->
     </device>
-    <device name='GPIO3' base='49052000h' size='4K'>
+    <device name='gpio3' base='49052000h' size='4K'>
         <reg offset='0h' name='REV_ID' expect='1234h' />
-        <reg offset='34h' name='OE' />
         <reg offset='34h' name='OE' />
         <reg offset='38h' name='DATAIN' />
         <reg offset='3Ch' name='DATAOUT' />
         <reg offset='54h' name='DEBOUNCINGTIME' />
-<!--        <reg offset='90h' name='CLEARDATAOUT' /> -->
-<!--        <reg offset='94h' name='SETDATAOUT' /> -->
     </device>
-    <device name='GPIO4' base='49054000h' size='4K'>
-        <reg offset='0h' name='REV_ID' expect='1234h' />
-        <reg offset='34h' name='OE' />
+    <device name='gpio4' base='49054000h' size='4K'>
+        <reg offset='0h' name='REV_ID' expect='25h' />
         <reg offset='34h' name='OE' />
         <reg offset='38h' name='DATAIN' />
         <reg offset='3Ch' name='DATAOUT' />
         <reg offset='54h' name='DEBOUNCINGTIME' />
-<!--        <reg offset='90h' name='CLEARDATAOUT' /> -->
-<!--        <reg offset='94h' name='SETDATAOUT' /> -->
     </device>
-    <device name='GPIO5' base='490560000h' size='4K'>
-        <reg offset='0h' name='REV_ID' expect='1234h' />
-        <reg offset='34h' name='OE' />
+    <device name='gpio5' base='49056000h' size='4K'>
+        <reg offset='0h' name='REV_ID' expect='25h' />
         <reg offset='34h' name='OE' />
         <reg offset='38h' name='DATAIN' />
         <reg offset='3Ch' name='DATAOUT' />
         <reg offset='54h' name='DEBOUNCINGTIME' />
-<!--        <reg offset='90h' name='CLEARDATAOUT' /> -->
-<!--        <reg offset='94h' name='SETDATAOUT' /> -->
     </device>
-    <device name='GPIO6' base='490580000h' size='4K'>
-        <reg offset='0h' name='REV_ID' expect='1234h' />
-        <reg offset='34h' name='OE' />
+    <device name='gpio6' base='49058000h' size='4K'>
+        <reg offset='0h' name='REV_ID' expect='25h' />
         <reg offset='34h' name='OE' />
         <reg offset='38h' name='DATAIN' />
         <reg offset='3Ch' name='DATAOUT' />
         <reg offset='54h' name='DEBOUNCINGTIME' />
-<!--        <reg offset='90h' name='CLEARDATAOUT' /> -->
-<!--        <reg offset='94h' name='SETDATAOUT' /> -->
     </device>
-    <device name='GPIO1' base='45094000h' size='4K'>
-        <reg offset='0h' name='REV_ID' expect='1234h' />
-        <reg offset='34h' name='OE' />
-        <reg offset='34h' name='OE' />
-        <reg offset='38h' name='DATAIN' />
-        <reg offset='3Ch' name='DATAOUT' />
-        <reg offset='54h' name='DEBOUNCINGTIME' />
-<!--        <reg offset='90h' name='CLEARDATAOUT' /> -->
-<!--        <reg offset='94h' name='SETDATAOUT' /> -->
+    <device name='scm' base='48002000h' size='4K'>
+        <reg offset='154h' name='MMC1_DAT6' />
+        <reg offset='158h' name='MMC2_CLK' />
+        <reg offset='15Ch' name='MMC2_DAT0' />
+        <reg offset='160h' name='MMC2_DAT2' />
+        <reg offset='164h' name='MMC2_DAT4' />
+        <reg offset='168h' name='MMC2_DAT6' />
+        <reg offset='16Ch' name='MCBSP3_DX' />
+        <reg offset='170h' name='MCBSP3_CLKX' />
+        <reg offset='174h' name='UART2_CTS' />
+        <reg offset='178h' name='UART2_TX' />
+        <reg offset='17Ch' name='UART1_TX' />
+        <reg offset='180h' name='UART1_CTS' />
+        <reg offset='184h' name='MCBSP4_CLKX' />
     </device>
 </cpu>
 
