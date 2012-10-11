@@ -96,6 +96,7 @@ public:
             // no nothing
             break;
         }
+        usleep(10);
 
         if (node->hasAttribute("expect")) {
             const std::string expectStr = node->getAttribute("expect"); 

@@ -1,0 +1,73 @@
+<cpu name='omap35x' >
+    <device name='GPIO1' base='48310000h' size='4K'>
+        <reg offset='0h' name='REV_ID' expect='1234h' />
+        <reg offset='34h' name='OE' />
+        <reg offset='34h' name='OE' />
+        <reg offset='38h' name='DATAIN' />
+        <reg offset='3Ch' name='DATAOUT' />
+        <reg offset='54h' name='DEBOUNCINGTIME' />
+<!--        <reg offset='90h' name='CLEARDATAOUT' /> -->
+<!--        <reg offset='94h' name='SETDATAOUT' /> -->
+    </device>
+    <device name='GPIO2' base='49050000h' size='4K'>
+        <reg offset='0h' name='REV_ID' expect='1234h' />
+        <reg offset='34h' name='OE' />
+        <reg offset='34h' name='OE' />
+        <reg offset='38h' name='DATAIN' />
+        <reg offset='3Ch' name='DATAOUT' />
+        <reg offset='54h' name='DEBOUNCINGTIME' />
+<!--        <reg offset='90h' name='CLEARDATAOUT' /> -->
+<!--        <reg offset='94h' name='SETDATAOUT' /> -->
+    </device>
+    <device name='GPIO3' base='49052000h' size='4K'>
+        <reg offset='0h' name='REV_ID' expect='1234h' />
+        <reg offset='34h' name='OE' />
+        <reg offset='34h' name='OE' />
+        <reg offset='38h' name='DATAIN' />
+        <reg offset='3Ch' name='DATAOUT' />
+        <reg offset='54h' name='DEBOUNCINGTIME' />
+<!--        <reg offset='90h' name='CLEARDATAOUT' /> -->
+<!--        <reg offset='94h' name='SETDATAOUT' /> -->
+    </device>
+    <device name='GPIO4' base='49054000h' size='4K'>
+        <reg offset='0h' name='REV_ID' expect='1234h' />
+        <reg offset='34h' name='OE' />
+        <reg offset='34h' name='OE' />
+        <reg offset='38h' name='DATAIN' />
+        <reg offset='3Ch' name='DATAOUT' />
+        <reg offset='54h' name='DEBOUNCINGTIME' />
+<!--        <reg offset='90h' name='CLEARDATAOUT' /> -->
+<!--        <reg offset='94h' name='SETDATAOUT' /> -->
+    </device>
+    <device name='GPIO5' base='490560000h' size='4K'>
+        <reg offset='0h' name='REV_ID' expect='1234h' />
+        <reg offset='34h' name='OE' />
+        <reg offset='34h' name='OE' />
+        <reg offset='38h' name='DATAIN' />
+        <reg offset='3Ch' name='DATAOUT' />
+        <reg offset='54h' name='DEBOUNCINGTIME' />
+<!--        <reg offset='90h' name='CLEARDATAOUT' /> -->
+<!--        <reg offset='94h' name='SETDATAOUT' /> -->
+    </device>
+    <device name='GPIO6' base='490580000h' size='4K'>
+        <reg offset='0h' name='REV_ID' expect='1234h' />
+        <reg offset='34h' name='OE' />
+        <reg offset='34h' name='OE' />
+        <reg offset='38h' name='DATAIN' />
+        <reg offset='3Ch' name='DATAOUT' />
+        <reg offset='54h' name='DEBOUNCINGTIME' />
+<!--        <reg offset='90h' name='CLEARDATAOUT' /> -->
+<!--        <reg offset='94h' name='SETDATAOUT' /> -->
+    </device>
+    <device name='GPIO1' base='45094000h' size='4K'>
+        <reg offset='0h' name='REV_ID' expect='1234h' />
+        <reg offset='34h' name='OE' />
+        <reg offset='34h' name='OE' />
+        <reg offset='38h' name='DATAIN' />
+        <reg offset='3Ch' name='DATAOUT' />
+        <reg offset='54h' name='DEBOUNCINGTIME' />
+<!--        <reg offset='90h' name='CLEARDATAOUT' /> -->
+<!--        <reg offset='94h' name='SETDATAOUT' /> -->
+    </device>
+</cpu>
+
