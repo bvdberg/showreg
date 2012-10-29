@@ -1,0 +1,22 @@
+<cpu name='am335x' >
+    <device name='lcd' base='4830E000h' size='4K'>
+        <reg offset='0h' name='PID' />
+        <reg offset='4h' name='CTRL' />
+        <reg offset='Ch' name='LIDD_CTRL' />
+        <reg offset='28h' name='RASTER_CTRL' />
+        <reg offset='2Ch' name='RASTER_TIMING_0' />
+        <reg offset='30h' name='RASTER_TIMING_1' />
+        <reg offset='34h' name='RASTER_TIMING_2' />
+        <reg offset='38h' name='RASTER_SUBPANEL' />
+        <reg offset='3Ch' name='RASTER_SUBPANEL2' />
+        <reg offset='40h' name='LCDDMA_CTRL' />
+        <reg offset='44h' name='LCDDMA_FB0_BASE' />
+        <reg offset='48h' name='LCDDMA_FB0_CEILING' />
+        <reg offset='4Ch' name='LCDDMA_FB1_BASE' />
+        <reg offset='50h' name='LCDDMA_FB1_CEILING' />
+        <reg offset='54h' name='SYSCONFIG' />
+        <reg offset='6Ch' name='CLKC_ENABLE' />
+        <reg offset='6Ch' name='CLKC_RESET' />
+    </device>
+</cpu>
+
