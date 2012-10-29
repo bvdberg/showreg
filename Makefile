@@ -1,7 +1,7 @@
+CROSS_COMPILE=
+CC=${CROSS_COMPILE}g++
+STRIP=${CROSS_COMPILE}strip
 
-CC=arm-none-linux-gnueabi-g++
-STRIP=arm-none-linux-gnueabi-strip
-#CC=g++
 ARGS=-O2 -Wall
 
 all: showreg XmlReader.o
