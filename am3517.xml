@@ -1,0 +1,11 @@
+<cpu name='am3517' >
+    <device name='lcd' base='48050400h' size='1K'>
+        <reg offset='40h' name='DISPC_CONTROL' />
+        <reg offset='44h' name='DISPC_CONFIG' />
+        <reg offset='64h' name='DISPC_TIMING_H' />
+        <reg offset='68h' name='DISPC_TIMING_V' />
+        <reg offset='6Ch' name='DISPC_POL_FREQ' />
+        <reg offset='70h' name='DISPC_DIVISOR' />
+    </device>
+</cpu>
+
