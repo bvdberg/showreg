@@ -40,6 +40,7 @@ static unsigned size2num(const char* input) {
     if (size > 31) return 0;
     unsigned int multiplier = 1;
     if (input[size-1] == 'K' || input[size-1] == 'k') multiplier = 1024;
+    else if (input[size-1] == 'M' || input[size-1] == 'm') multiplier = 1024*1024;
     unsigned int value = 0;
     // TODO check result
     sscanf(input, "%d", &value);
@@ -55,7 +56,7 @@ void printMemory(unsigned int* start, unsigned int base, unsigned int size) {
         unsigned int val = *(ptr);
         printf("0x%08X  [0x%04X]  0x%08X\n", (unsigned int)base+offset*4, offset*sizeof(int), val);
         offset += 1;
-    }   
+    }
     printf("\n");
 }
 
@@ -72,7 +73,7 @@ public:
         const std::string offsetStr = node->getAttribute("offset");
         const std::string nameStr = node->getAttribute("name");
         unsigned int offset = addr2num(offsetStr.c_str());
-        
+
         if (offset >= size) {
             printf("line %d: register offset outside mapping\n", node->getLine());
             exit(-1);
@@ -99,7 +100,7 @@ public:
         usleep(10);
 
         if (node->hasAttribute("expect")) {
-            const std::string expectStr = node->getAttribute("expect"); 
+            const std::string expectStr = node->getAttribute("expect");
             unsigned int expect = addr2num(expectStr.c_str());
             switch (regsize) {
             case 16:
@@ -144,7 +145,7 @@ public:
         const std::string baseStr = node->getAttribute("base");
         const std::string sizeStr = node->getAttribute("size");
         const std::string& regSizeStr = node->getOptionalAttribute("regsize");
-        
+
         unsigned int base = addr2num(baseStr.c_str());
         unsigned int size = size2num(sizeStr.c_str());
         unsigned int regsize = 32;

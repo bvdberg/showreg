@@ -18,5 +18,37 @@
         <reg offset='6Ch' name='CLKC_ENABLE' />
         <reg offset='6Ch' name='CLKC_RESET' />
     </device>
+    <device name='gpmc' base='50000000h' size='16M'>
+        <reg offset='0h' name='GPMC_REVISION' />
+        <reg offset='10h' name='GPMC_SYSCONFIG' />
+        <reg offset='48h' name='GPMC_ERR_TYPE' />
+        <reg offset='50h' name='GPMC_CONFIG' />
+        <!--
+        From spruh73g.pdf:
+
+        i = 0 to 6 for GPMC
+        60h + (30h * i) GPMC_CONFIG1_i
+        64h + (30h * i) GPMC_CONFIG2_i
+        68h + (30h * i) GPMC_CONFIG3_i
+        6Ch + (30h * i) GPMC_CONFIG4_i
+        70h + (30h * i) GPMC_CONFIG5_i
+        74h + (30h * i) GPMC_CONFIG6_i
+        78h + (30h * i) GPMC_CONFIG7_i
+        7Ch + (30h * i) GPMC_NAND_COMMAND_i
+        80h + (30h * i) GPMC_NAND_ADDRESS_i
+        84h + (30h * i) GPMC_NAND_DATA_i
+        -->
+        <reg offset='60h' name='GPMC_CONFIG1_0' />
+        <reg offset='64h' name='GPMC_CONFIG2_0' />
+        <reg offset='68h' name='GPMC_CONFIG3_0' />
+        <reg offset='6Ch' name='GPMC_CONFIG4_0'  />
+        <reg offset='70h' name='GPMC_CONFIG5_0' />
+        <reg offset='74h' name='GPMC_CONFIG6_0' />
+        <reg offset='78h' name='GPMC_CONFIG7_0' />
+        <reg offset='7Ch' name='GPMC_NAND_COMMAND_0' />
+        <reg offset='80h' name='GPMC_NAND_ADDRESS_0' />
+        <reg offset='84h' name='GPMC_NAND_DATA_0' />
+
+    </device>
 </cpu>
 
