@@ -48,7 +48,53 @@
         <reg offset='7Ch' name='GPMC_NAND_COMMAND_0' />
         <reg offset='80h' name='GPMC_NAND_ADDRESS_0' />
         <reg offset='84h' name='GPMC_NAND_DATA_0' />
-
+    </device>
+    <device name='gpio0' base='44e07000h' size='4K'>
+        <reg offset='0h' name='GPIO_REVISION' expect='50600801h' />
+        <reg offset='10h' name='GPIO_SYSCONFIG' />
+        <reg offset='114h' name='GPIO_SYSSTATUS' />
+        <reg offset='130h' name='GPIO_CTRL' />
+        <reg offset='134h' name='GPIO_OE' />
+        <reg offset='138h' name='GPIO_DATAIN' />
+        <reg offset='13Ch' name='GPIO_DATAOUT' />
+    </device>
+    <device name='gpio1' base='4804C000h' size='4K'>
+        <reg offset='0h' name='GPIO_REVISION' expect='50600801h' />
+        <reg offset='10h' name='GPIO_SYSCONFIG' />
+        <reg offset='114h' name='GPIO_SYSSTATUS' />
+        <reg offset='130h' name='GPIO_CTRL' />
+        <reg offset='134h' name='GPIO_OE' />
+        <reg offset='138h' name='GPIO_DATAIN' />
+        <reg offset='13Ch' name='GPIO_DATAOUT' />
+    </device>
+    <device name='gpio2' base='481AC000h' size='4K'>
+        <reg offset='0h' name='GPIO_REVISION' expect='50600801h' />
+        <reg offset='10h' name='GPIO_SYSCONFIG' />
+        <reg offset='114h' name='GPIO_SYSSTATUS' />
+        <reg offset='130h' name='GPIO_CTRL' />
+        <reg offset='134h' name='GPIO_OE' />
+        <reg offset='138h' name='GPIO_DATAIN' />
+        <reg offset='13Ch' name='GPIO_DATAOUT' />
+    </device>
+    <device name='gpio3' base='481AE000h' size='4K'>
+        <reg offset='0h' name='GPIO_REVISION' expect='50600801h' />
+        <reg offset='10h' name='GPIO_SYSCONFIG' />
+        <reg offset='114h' name='GPIO_SYSSTATUS' />
+        <reg offset='130h' name='GPIO_CTRL' />
+        <reg offset='134h' name='GPIO_OE' />
+        <reg offset='138h' name='GPIO_DATAIN' />
+        <reg offset='13Ch' name='GPIO_DATAOUT' />
+    </device>
+    <device name='control_module' base='44E10000h' size='128K'>
+        <reg offset='0h' name='control_revision' expect='0h' />
+        <reg offset='4h' name='control_hwinfo' />
+        <reg offset='10h' name='control_sysconfig' />
+        <reg offset='40h' name='control_status' />
+        <reg offset='600h' name='device_id' />
+        <reg offset='908h' name='conf_mii1_col (CLK)' />
+        <reg offset='968h' name='conf_uart0_ctsn (MISO)' />
+        <reg offset='96Ch' name='conf_uart0_rtsn (MOSI)' />
+        <reg offset='99Ch' name='conf_mcaspc0_ahclkr (SYNC)' />
     </device>
 </cpu>
 
