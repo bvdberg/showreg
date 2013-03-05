@@ -91,10 +91,10 @@
         <reg offset='10h' name='control_sysconfig' />
         <reg offset='40h' name='control_status' />
         <reg offset='600h' name='device_id' />
-        <reg offset='908h' name='conf_mii1_col (CLK)' />
-        <reg offset='968h' name='conf_uart0_ctsn (MISO)' />
-        <reg offset='96Ch' name='conf_uart0_rtsn (MOSI)' />
-        <reg offset='99Ch' name='conf_mcaspc0_ahclkr (SYNC)' />
+        <reg offset='908h' name='conf_mii1_col' />
+        <reg offset='968h' name='conf_uart0_ctsn' />
+        <reg offset='96Ch' name='conf_uart0_rtsn' />
+        <reg offset='99Ch' name='conf_mcaspc0_ahclkr' />
     </device>
     <device name='CM_WKUP' base='44C00000h' size='4M'>
         <reg offset='200400h' name='CM_WKUP_CLKSTCTRL' />
