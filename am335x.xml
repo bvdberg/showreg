@@ -96,5 +96,21 @@
         <reg offset='96Ch' name='conf_uart0_rtsn (MOSI)' />
         <reg offset='99Ch' name='conf_mcaspc0_ahclkr (SYNC)' />
     </device>
+    <device name='CM_WKUP' base='44C00000h' size='4M'>
+        <reg offset='200400h' name='CM_WKUP_CLKSTCTRL' />
+        <reg offset='200424h' name='CM_SSC_DELTAMSTEP_DPLL_MPU' />
+        <reg offset='200428h' name='CM_SSC_MODFREQDIV_DPLL_MPU' />
+        <reg offset='200438h' name='CM_SSC_DELTAMSTEP_DPLL_DDR' />
+        <reg offset='20043Ch' name='CM_SSC_MODFREQDIV_DPLL_DDR' />
+        <reg offset='20044Ch' name='CM_SSC_DELTAMSTEP_DPLL_DISP' />
+        <reg offset='200450h' name='CM_SSC_MODFREQDIV_DPLL_DISP' />
+        <reg offset='200454h' name='CM_CLKSEL_DPLL_DISP' />
+        <reg offset='200460h' name='CM_SSC_DELTAMSTEP_DPLL_CORE' />
+        <reg offset='200464h' name='CM_SSC_MODFREQDIV_DPLL_CORE' />
+        <reg offset='200474h' name='CM_SSC_DELTAMSTEP_DPLL_PER' />
+        <reg offset='200478h' name='CM_SSC_MODFREQDIV_DPLL_PER' />
+        <reg offset='200498h' name='CM_CLKMODE_DPLL_DISP' />
+        <reg offset='2004A4h' name='CM_DIV_M2_DPLL__DISP' />
+    </device>
 </cpu>
 
