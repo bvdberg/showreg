@@ -6,6 +6,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <stdint.h>
 
 #include "XmlReader.h"
 
@@ -19,7 +20,7 @@
 
 // support '1234', '1234h'
 static unsigned addr2num(const char* input) {
-    int size = strlen(input);
+    int size = (int)strlen(input);
     if (size == 0) return 0;
     if (size > 31) return 0;
     unsigned int value = 0;
@@ -35,7 +36,7 @@ static unsigned addr2num(const char* input) {
 
 // support '4K', '32k'
 static unsigned size2num(const char* input) {
-    int size = strlen(input);
+    int size = (int)strlen(input);
     if (size == 0) return 0;
     if (size > 31) return 0;
     unsigned int multiplier = 1;
@@ -54,7 +55,7 @@ void printMemory(unsigned int* start, unsigned int base, unsigned int size) {
     while (offset < size) {
         unsigned int* ptr = start + offset;
         unsigned int val = *(ptr);
-        printf("0x%08X  [0x%04X]  0x%08X\n", (unsigned int)base+offset*4, offset*sizeof(int), val);
+        printf("0x%08X  [0x%04X]  0x%08X\n", (unsigned int)base+offset*4, (unsigned int)(offset*sizeof(int)), val);
         offset += 1;
     }
     printf("\n");
@@ -63,7 +64,7 @@ void printMemory(unsigned int* start, unsigned int base, unsigned int size) {
 
 class RegVisitor : public XmlNodeVisitor {
 public:
-    RegVisitor(unsigned int* map_base_, unsigned int reg_base_, unsigned int size_, unsigned int regsize_ = 32)
+    RegVisitor(void* map_base_, unsigned int reg_base_, unsigned int size_, unsigned int regsize_ = 32)
         : map_base(map_base_)
         , reg_base(reg_base_)
         , size(size_)
@@ -82,7 +83,7 @@ public:
             printf("line %d: register offset not on word offset\n", node->getLine());
             exit(-1);
         }
-        unsigned int addr = (unsigned int)map_base;
+        unsigned int* addr = (unsigned int*)map_base;
         addr += offset;
         unsigned int value = *((volatile unsigned int*)addr);
         switch (regsize) {
@@ -130,7 +131,7 @@ public:
         }
     }
 private:
-    unsigned int* map_base;
+    void* map_base;
     unsigned int reg_base;
     unsigned int size;
     unsigned int regsize;

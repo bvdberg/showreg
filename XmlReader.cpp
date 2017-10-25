@@ -73,7 +73,7 @@ public:
     const char* operator[] (int i) const {
         return elements[i].c_str();
     }
-    int size() const { return elements.size(); }
+    int size() const { return (int)elements.size(); }
 
 private:
     typedef std::deque<std::string> Elements;
@@ -181,9 +181,9 @@ void XmlNode::addAttribute(const string& key, const string& value) {
 }
 
 
-void XmlNode::visitChildren(const std::string& name, XmlNodeVisitor& visitor) const {
+void XmlNode::visitChildren(const std::string& name_, XmlNodeVisitor& visitor) const {
     for (ChildrenConstIter iter = children.begin(); iter != children.end(); ++iter) {
-        if ((*iter)->name == name) visitor.handle(*iter);
+        if ((*iter)->name == name_) visitor.handle(*iter);
     }
 }
 

@@ -1,4 +1,4 @@
-showreg
+build/
 tags
 cscope.out
 *.o
